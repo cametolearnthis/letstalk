@@ -10,6 +10,7 @@ import morgan from "morgan";
 //native packages from node
 import path from "path"; //https://nodejs.org/api/path.html#path
 import { fileURLToPath } from "url"; //https://nodejs.org/api/url.html#urlfileurltopathurl
+import {register} from "./controllers/auth.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -35,6 +36,9 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage });
+
+/* ROUTES WITH FILES */
+app.post("auth/register", upload.single("picture"), register);
 
 
 /*MONGOOSE SETUP*/
