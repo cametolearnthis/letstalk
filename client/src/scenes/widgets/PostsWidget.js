@@ -19,7 +19,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `http://localhost:3001/posts/${userid}/posts`,
+      `http://localhost:3001/posts/${userId}/posts`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -35,24 +35,24 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     } else {
       getPosts();
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
-    {posts.map(
+      {posts.map(
         ({
-            _id,
-            userId,
-            firstName,
-            lastName,
-            description, 
-            location, 
-            picturePath,
-            userPicturePath,
-            likes,
-            comments
+          _id,
+          userId,
+          firstName,
+          lastName,
+          description,
+          location,
+          picturePath,
+          userPicturePath,
+          likes,
+          comments,
         }) => (
-            <PostWidget
+          <PostWidget
             key={_id}
             postId={_id}
             postUserId={userId}
@@ -63,10 +63,11 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             userPicturePath={userPicturePath}
             likes={likes}
             comments={comments}
-            ></PostWidget>
+          />
         )
-    )}</>
-  )
+      )}
+    </>
+  );
 };
 
 export default PostsWidget;
